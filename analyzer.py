@@ -12,6 +12,7 @@ def load_data(url):
     response = requests.get(url)
     return response
 
+# usage function
 def usage(exit_code=0):
     progname = os.path.basename(sys.argv[0])
     print(f'''Usage: {progname} [-p PAGES]
@@ -19,7 +20,7 @@ def usage(exit_code=0):
     Default number of pages is 9''')
     sys.exit(exit_code)
 
-
+# makes generator of the href for each player page
 def href_generator(urls):
     for url in urls:
         page = load_data(url)
@@ -30,6 +31,7 @@ def href_generator(urls):
                 if(href):
                     yield href.group(1)
 
+# makes generator of responses from each player page
 def get_tag_data(href_list):
     for href in href_list:
         player_stats = []
